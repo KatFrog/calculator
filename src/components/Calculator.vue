@@ -4,6 +4,10 @@
     <div @click="clear()" class="clear key">C</div>
     <div @click="sign()" class="operator key">+/-</div>
     <div @click="percent()" class="operator key">%</div>
+    <div @click="pi()" class="operator key">&pi;</div>
+    <div @click="inverse()" class="operator key">1/x</div>
+    <div @click="squared()" class="operator key">x<sup>2</sup></div>
+    <div @click="sqrt()" class="operator key">&radic;<span style="padding-top: 1px; text-decoration:overline;">x</span></div>
     <div @click="divide()" class="operator key">&divide;</div>
     <div @click="append('7')" class="key">7</div>
     <div @click="append('8')" class="key">8</div>
@@ -117,7 +121,23 @@ export default {
                 this.operatorClicked = false;
             }
             this.current = `${this.current}${number}`;
-        }
+        },
+
+        sqrt() {
+            this.current = String(Math.sqrt(parseFloat(this.current)));
+        },
+
+        squared() {
+            this.current = String(parseFloat(this.current) * parseFloat(this.current));
+        },
+
+        pi() {
+            this.current = "3.14159265359";
+        },
+
+        inverse() {
+            this.current = String(1 / parseFloat(this.current));
+        },
     }
   }
 </script>
@@ -131,7 +151,7 @@ export default {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: minmax(50px, auto);
         margin: 0 auto;
-        width: 450px;
+        width: 400px;
     }
 
     .clear {
@@ -141,6 +161,9 @@ export default {
 
     .display {
         grid-column: 1 / 5;
+        padding-right: 5px;
+        padding-top: 5px;
+        text-align: right;
     }
 
     .key {
@@ -148,7 +171,8 @@ export default {
     }
 
     .operator {
-        background-color:  orange;
+        background-color:  blue;
+        color: white;
     }
 
     .zero {
